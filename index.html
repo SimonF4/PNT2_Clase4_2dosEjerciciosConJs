@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Esto es el nombre en de la pestania-->
+    <title>
+        PNT2_Clase4_2dosEjerciciosConJs
+    </title>
+</head>
+
+<body>
+
+    <h1>
+        Pagina web para testeo de codigo Javascript.
+    </h1>
+
+    <p>
+        Presione F12 para ver los resultados en la linea de comando de su respectivo navegador web.
+    </p>
+
+    <script>
+        //Ejs1:
+        function esperar(tiempo) {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve(`Esperado ${tiempo} ms`);
+                }, tiempo);
+            });
+        }
+
+        esperar(2000)
+            .then((resultado) => {
+                console.log(resultado);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+
+        /* **********************PARA TESTEAR EL CASO DE ERROR:**********************
+        function esperar(tiempo) {
+            return new Promise((reject) => {
+                setTimeout(() => {
+                    reject(new Error("Error 4000"));
+        }   , tiempo);
+            });
+        }
+
+        esperar(2000)
+            .then((resultado) => {
+            console.log(resultado);
+            })
+            .catch((error) => {
+            console.error('Error:', error);
+            });
+            
+        RTA =Error: Error 4000
+            at index.html:26:28*/
+
+        //Ejs2:
+        
+
+        //Ejs3:
+        
+
+        //Ejs4:
+        
+
+        //Ejs5:
+
+        //console.log(variable1);
+    </script>
+
+</body>
+
+</html>
