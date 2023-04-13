@@ -57,7 +57,22 @@
             at index.html:26:28*/
 
         //Ejs2:
-        
+        async function esperar(tiempo) {
+            try {
+                const promesa1 = await new Promise((resolve) => {
+                    setTimeout(() => {
+                        resolve('Esperado $(tiempo) ms');
+                    }, tiempo)
+                });
+
+                console.log(promesa1);
+
+            } catch (error) {
+            console.error("Error:", error);
+            }
+        }
+
+        esperar(2000);
 
         //Ejs3:
         
