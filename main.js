@@ -7,7 +7,7 @@ una espera
 function esperar(tiempo) {
     return new Promise((resolve) => {  //devuelvo una Promesa, la cual adentro siempre tiene una funcion(en este caso esta escrita como lambda)
         setTimeout(() => {  //Uso del metodo setTimeout-> tambien se puede meter una funcion dentro.
-            resolve('Esperado $(tiempo) ms');   //devuelvo q se pudo resolver y el mensaje.
+            resolve(`Esperado ${tiempo} ms`);   //devuelvo q se pudo resolver y el mensaje.
         }, tiempo)  //el tiempo es eparte del timeout
     }); //aca termina la creacion de la Promesa.
 }
@@ -50,7 +50,7 @@ async function esperar(tiempo) {
     try {
         const promesa1 = await new Promise((resolve) => {
             setTimeout(() => {
-                resolve('Esperado $(tiempo) ms');
+                resolve(`Esperado ${tiempo} ms`);
             }, tiempo)
         });
 
@@ -96,4 +96,75 @@ funciones hijas tienen que simular el llamado a un servicio usando setTimeout y 
 clase Promise(se puede mezclar con async/await). Crear una funcion padre que use
 a las anteriores. Agregarle lo que falte, como palabras reservadas y demas.
 **********************************************************************************************************************************************************
+*/
+//devuelve un objetito
+async function obtenerUsuario(id) { 
+    try {
+        const tiempo = 2000;
+        const resultado = await new Promise( (resolve) => {
+            setTimeout(() => {
+                //resolve("Usuario id $(id) | Esperado $(tiempo) ms");
+                resolve({ nombre: "Usuario $(id)", id: id }); //directamente devuelvo el usuario.
+            }, tiempo);
+        });
+
+        console.log(resultado);
+        
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+//devuelve un array de strings
+async function obtenerPublicaciones(idUsuario) { 
+    try {
+        const tiempo = 4000;
+        const arrayResultante = ["bobby", "hadz", "com"];/*[
+                    { nombre: "Usuario", id: idUsuario, publicacion: "publi_1"}, 
+                    { nombre: "Usuario", id: idUsuario, publicacion: "publi_2"}, 
+                    { nombre: "Usuario", id: idUsuario, publicacion: "publi_3"}
+                ];*/
+        const resultado = await new Promise( (resolve) => {
+            setTimeout(() => {
+                //resolve("Usuario id $(id) | Esperado $(tiempo) ms");
+                resolve(arrayResultante); //directamente devuelvo el array de publicaciones.
+            }, tiempo);
+        });
+
+        console.log(resultado);
+
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+async function obtenerInfoCompletaUsuario(idUsuario) {
+    try {
+        const usuario = obtenerUsuario(idUsuario);
+        const publicaciones = obtenerPublicaciones(idUsuario);
+
+        console.log(`Nombre de usuario: ${usuario.nombre}`);
+        console.log(`Publicaciones del usuario: ${publicaciones.join(', ')}`);
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+obtenerInfoCompletaUsuario(1);
+
+/*RTA = 
+Nombre de usuario: undefined
+index.html:126 Error: TypeError: publicaciones.join is not a function
+    at obtenerInfoCompletaUsuario (index.html:124:65)
+    at index.html:130:1
+{nombre: 'Usuario $(id)', id: 1}id: 1nombre: "Usuario $(id)"[[Prototype]]: Object
+index.html:111 (3) [{…}, {…}, {…}]
+*/
+
+//Creo q en ambos tira sin definir pq no me toma como q publicaciones sea un array a pesar de q en el metodo le devuelvo un array.
+    //[asi anda pero con el metodo de publicaciones no]probar si directamente en publicaciones reemplazo por un array y listo.
+
+/*
+Ejercicio 4:
+
 */
