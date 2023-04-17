@@ -165,6 +165,64 @@ index.html:111 (3) [{…}, {…}, {…}]
     //[asi anda pero con el metodo de publicaciones no]probar si directamente en publicaciones reemplazo por un array y listo.
 
 /*
+**********************************************************************************************************************************************************
 Ejercicio 4:
+Modificar el ejercicio anterior para hacer
+las llamadas en simultaneo.
+**********************************************************************************************************************************************************
+*/
+                                                            //Copio mi ejs3:
+//devuelve un objetito
+async function obtenerUsuario(id) { 
+    try {
+        const tiempo = 2000;
+        const resultado = await new Promise( (resolve) => {
+            setTimeout(() => {
+                resolve({ nombre: "Usuario $(id)", id: id }); //directamente devuelvo el usuario.
+            }, tiempo);
+        });
 
+        console.log(resultado);
+        
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+//devuelve un array de strings
+async function obtenerPublicaciones(idUsuario) { 
+    try {
+        const tiempo = 4000;
+        const arrayResultante = ["bobby", "hadz", "com"];
+        const resultado = await new Promise( (resolve) => {
+            setTimeout(() => {
+                resolve(arrayResultante); //directamente devuelvo el array de publicaciones.
+            }, tiempo);
+        });
+
+        console.log(resultado);
+
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+async function obtenerInfoCompletaUsuario(idUsuario) {
+    try {
+        const [usuario, publicaciones] = await Promise.all([obtenerUsuario(idUsuario), obtenerPublicaciones(idUsuario)]);
+
+        console.log(`Nombre de usuario: ${usuario.nombre}`);
+        console.log(`Publicaciones del usuario: ${publicaciones.join(', ')}`);
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+obtenerInfoCompletaUsuario(1);
+
+//Para hacerlo con async await, ejemplo-> https://es.stackoverflow.com/questions/419017/como-usar-promise-all-en-async-await
+/*Segun lo visto en clase:
+Si quiero q sean al mismo tiempo?
+    Podemos usar el Promise.all() con un await adelante:
+        await Promise.all()
 */
