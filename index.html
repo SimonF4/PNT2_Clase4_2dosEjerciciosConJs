@@ -61,7 +61,7 @@
             try {
                 const promesa1 = await new Promise((resolve) => {
                     setTimeout(() => {
-                        resolve('Esperado $(tiempo) ms');
+                        resolve(`Esperado ${tiempo} ms`);
                     }, tiempo)
                 });
 
@@ -75,7 +75,59 @@
         esperar(2000);
 
         //Ejs3:
+        async function obtenerUsuario(id) { 
+            try {
+                const tiempo = 2000;
+                const resultado = await new Promise( (resolve) => {
+                    setTimeout(() => {
+                        //resolve("Usuario id $(id) | Esperado $(tiempo) ms");
+                        resolve({ nombre: "Usuario $(id)", id: id }); //directamente devuelvo el usuario.
+                    }, tiempo);
+                });
+
+                console.log(resultado);
         
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        //devuelve un array de strings
+        async function obtenerPublicaciones(idUsuario) { 
+            try {
+                const tiempo = 4000;
+                const arrayResultante = ["bobby", "hadz", "com"];/*[
+                            { nombre: "Usuario", id: idUsuario, publicacion: "publi_1"}, 
+                            { nombre: "Usuario", id: idUsuario, publicacion: "publi_2"}, 
+                            { nombre: "Usuario", id: idUsuario, publicacion: "publi_3"}
+                        ];*/
+                const resultado = await new Promise( (resolve) => {
+                    setTimeout(() => {
+                        //resolve("Usuario id $(id) | Esperado $(tiempo) ms");
+                        resolve(arrayResultante); //directamente devuelvo el array de publicaciones.
+                    }, tiempo);
+                });
+
+                console.log(resultado);
+
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        async function obtenerInfoCompletaUsuario(idUsuario) {
+            try {
+                const usuario = obtenerUsuario(idUsuario);
+                const publicaciones = obtenerPublicaciones(idUsuario);
+
+                console.log(`Nombre de usuario: ${usuario.nombre}`);
+                console.log(`Publicaciones del usuario: ${publicaciones.join(', ')}`);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        obtenerInfoCompletaUsuario(1);
 
         //Ejs4:
         
