@@ -130,11 +130,54 @@
         obtenerInfoCompletaUsuario(1);
 
         //Ejs4:
-        
+                                                                    //Copio mi ejs3:
+        //devuelve un objetito
+        async function obtenerUsuario(id) { 
+            try {
+                const tiempo = 2000;
+                const resultado = await new Promise( (resolve) => {
+                    setTimeout(() => {
+                        resolve({ nombre: "Usuario $(id)", id: id }); //directamente devuelvo el usuario.
+                    }, tiempo);
+                });
 
-        //Ejs5:
+                console.log(resultado);
+                
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
 
-        //console.log(variable1);
+        //devuelve un array de strings
+        async function obtenerPublicaciones(idUsuario) { 
+            try {
+                const tiempo = 4000;
+                const arrayResultante = ["bobby", "hadz", "com"];
+                const resultado = await new Promise( (resolve) => {
+                    setTimeout(() => {
+                        resolve(arrayResultante); //directamente devuelvo el array de publicaciones.
+                    }, tiempo);
+                });
+
+                console.log(resultado);
+
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        async function obtenerInfoCompletaUsuario(idUsuario) {
+            try {
+                const [usuario, publicaciones] = await Promise.all([obtenerUsuario(idUsuario), obtenerPublicaciones(idUsuario)]);
+
+                console.log(`Nombre de usuario: ${usuario.nombre}`);
+                console.log(`Publicaciones del usuario: ${publicaciones.join(', ')}`);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        obtenerInfoCompletaUsuario(1);
     </script>
 
 </body>
