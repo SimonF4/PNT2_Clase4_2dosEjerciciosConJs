@@ -104,12 +104,13 @@ async function obtenerUsuario(id) {
         const resultado = await new Promise( (resolve) => {
             setTimeout(() => {
                 //resolve("Usuario id $(id) | Esperado $(tiempo) ms");
-                resolve({ nombre: "Usuario $(id)", id: id }); //directamente devuelvo el usuario.
+                resolve({ nombre: `Usuario ${id}`, id: id }); //directamente devuelvo el usuario.
             }, tiempo);
         });
-
+    
         console.log(resultado);
-        
+        return resultado;
+
     } catch (error) {
         console.error('Error:', error);
     }
@@ -119,7 +120,9 @@ async function obtenerUsuario(id) {
 async function obtenerPublicaciones(idUsuario) { 
     try {
         const tiempo = 4000;
-        const arrayResultante = ["bobby", "hadz", "com"];/*[
+        const arrayResultante = ["bobby", "hadz", "com"]; //Piden devolver un array de Strings.
+                /*Para el caso de querer devolver un array de objetos:
+                [
                     { nombre: "Usuario", id: idUsuario, publicacion: "publi_1"}, 
                     { nombre: "Usuario", id: idUsuario, publicacion: "publi_2"}, 
                     { nombre: "Usuario", id: idUsuario, publicacion: "publi_3"}
@@ -130,9 +133,10 @@ async function obtenerPublicaciones(idUsuario) {
                 resolve(arrayResultante); //directamente devuelvo el array de publicaciones.
             }, tiempo);
         });
-
+    
         console.log(resultado);
-
+        return resultado;
+    
     } catch (error) {
         console.error('Error:', error);
     }
@@ -140,9 +144,9 @@ async function obtenerPublicaciones(idUsuario) {
 
 async function obtenerInfoCompletaUsuario(idUsuario) {
     try {
-        const usuario = obtenerUsuario(idUsuario);
-        const publicaciones = obtenerPublicaciones(idUsuario);
-
+        const usuario = await obtenerUsuario(idUsuario);
+        const publicaciones = await obtenerPublicaciones(idUsuario);
+    
         console.log(`Nombre de usuario: ${usuario.nombre}`);
         console.log(`Publicaciones del usuario: ${publicaciones.join(', ')}`);
     } catch (error) {
@@ -178,12 +182,14 @@ async function obtenerUsuario(id) {
         const tiempo = 2000;
         const resultado = await new Promise( (resolve) => {
             setTimeout(() => {
-                resolve({ nombre: "Usuario $(id)", id: id }); //directamente devuelvo el usuario.
+                //resolve("Usuario id $(id) | Esperado $(tiempo) ms");
+                resolve({ nombre: `Usuario ${id}`, id: id }); //directamente devuelvo el usuario.
             }, tiempo);
         });
-
+    
         console.log(resultado);
-        
+        return resultado;
+
     } catch (error) {
         console.error('Error:', error);
     }
@@ -193,15 +199,23 @@ async function obtenerUsuario(id) {
 async function obtenerPublicaciones(idUsuario) { 
     try {
         const tiempo = 4000;
-        const arrayResultante = ["bobby", "hadz", "com"];
+        const arrayResultante = ["bobby", "hadz", "com"]; //Piden devolver un array de Strings.
+                /*Para el caso de querer devolver un array de objetos:
+                [
+                    { nombre: "Usuario", id: idUsuario, publicacion: "publi_1"}, 
+                    { nombre: "Usuario", id: idUsuario, publicacion: "publi_2"}, 
+                    { nombre: "Usuario", id: idUsuario, publicacion: "publi_3"}
+                ];*/
         const resultado = await new Promise( (resolve) => {
             setTimeout(() => {
+                //resolve("Usuario id $(id) | Esperado $(tiempo) ms");
                 resolve(arrayResultante); //directamente devuelvo el array de publicaciones.
             }, tiempo);
         });
-
+    
         console.log(resultado);
-
+        return resultado;
+    
     } catch (error) {
         console.error('Error:', error);
     }
